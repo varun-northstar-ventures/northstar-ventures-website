@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #161718;
+  --color-brand: #c800ff;
+  --color-line: #cccccc;
+  --color-whatsapp: #29a71a;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  /* Light design only: never adapt to the device's dark mode. */
+  :root {
+    color-scheme: only light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /*
+   * Elements revealing from the side start translated past the edge; clip them so
+   * the page never scrolls sideways. `clip` (unlike `hidden`) keeps sticky working.
+   */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  dialog::backdrop {
+    background: transparent;
+  }
+
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/*
+ * Figma "vertical trim: cap height". Poppins' line box puts the cap top
+ * 0.35em above the vertical centre, so trimming (1lh - 0.7em) / 2 from each
+ * side leaves exactly the cap height, as in the design.
+ */
+@utility trim-cap {
+  margin-block: calc((0.7em - 1lh) / 2);
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 20px;
+
+  @media (width >= 48rem) {
+    padding-inline: 40px;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 120px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-size: 12px;
+    line-height: 14px;
+
+    @media (width >= 48rem) {
+      font-size: 14px;
+    }
+  }
+
+  .heading {
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 400;
+    margin-block: calc((0.7em - 1lh) / 2);
+
+    @media (width >= 48rem) {
+      font-size: 54px;
+      line-height: 54px;
+    }
+  }
+
+  .body-copy {
+    font-size: 14px;
+    line-height: 24px;
+
+    @media (width >= 48rem) {
+      font-size: 16px;
+      line-height: 30px;
+    }
+  }
+}
+
+/* Viewport reveal: only hidden once JS has marked the document as ready. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js [data-reveal="left"] {
+  transform: translate3d(-32px, 0, 0);
+}
+
+.js [data-reveal="right"] {
+  transform: translate3d(32px, 0, 0);
+}
+
+/* Delays apply on the way in only, so leaving the viewport resets instantly-ish. */
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Heading scroll reveal: words go from slightly blurred to sharp, staggered. */
+.js [data-reveal="words"] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.js [data-reveal="words"] .reveal-word {
+  display: inline-block;
+  opacity: 0.25;
+  filter: blur(6px);
+  transition:
+    opacity 0.9s ease,
+    filter 0.9s ease;
+}
+
+.js [data-reveal="words"].is-visible .reveal-word {
+  opacity: 1;
+  filter: blur(0);
+  transition-delay: calc(var(--w, 0) * 70ms);
+}
+
+/*
+ * Hero glow: the exported Figma ellipse (1440×820 incl. its progressive blur).
+ * Spans the page width (not 100vw, which would run under the scrollbar and
+ * crop the top corners); 818px minimum as in the mobile design. On screens
+ * wider than 1440px it stretches sideways but keeps its 820px depth.
+ */
+.hero-glow {
+  top: 0;
+  width: max(818px, 100%);
+  height: clamp(466px, 56.95vw, 820px);
+  pointer-events: none;
+}
+
+/* Sticky nav slides up from the bottom once the page loads. */
+@keyframes nav-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 140%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.nav-rise {
+  animation: nav-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+/*
+ * WhatsApp: a soft green glow breathing in and out. Opacity only (no scaling),
+ * and the glow layer is filled green so no gap can open between icon and glow.
+ */
+@keyframes whatsapp-glow {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.whatsapp-glow {
+  background: var(--color-whatsapp);
+  box-shadow: 0 0 24px 6px rgb(41 167 26 / 0.65);
+  animation: whatsapp-glow 2.2s ease-in-out infinite;
+}
+
+/* Infinite marquee: two identical tracks slide left → right. */
+@keyframes marquee-ltr {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.marquee-track {
+  animation: marquee-ltr 40s linear infinite;
+}
+
+/* Hero designation rotator: each word holds for 3s of a 12s cycle. */
+@keyframes rotate-word {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 60%, 0);
+  }
+  4%,
+  21% {
+    opacity: 1;
+    transform: none;
+  }
+  25%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -60%, 0);
+  }
+}
+
+.rotating-word {
+  animation: rotate-word 12s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: calc(var(--i) * 3s);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js [data-reveal],
+  .js [data-reveal="words"] .reveal-word {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .marquee-track,
+  .nav-rise,
+  .whatsapp-glow {
+    animation: none;
+  }
+
+  .rotating-word {
+    animation: none;
+  }
+
+  .rotating-word:first-child {
+    opacity: 1;
+  }
+}
