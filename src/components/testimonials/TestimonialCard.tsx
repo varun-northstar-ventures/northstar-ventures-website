@@ -38,7 +38,16 @@ const paragraphs = (quote: Testimonial["quote"]) => (Array.isArray(quote) ? quot
  * Background and text are separate layers that fade with their own opacity.
  */
 export function TestimonialCard({ testimonial, className = "", glassStyle, contentStyle, backdrop, scrollable }: Props) {
-  const { name, quote, logo, company, designation, course, industry, location } = testimonial;
+  const { name, quote, photo, logo, company, companyHref, designation, course, industry, location } = testimonial;
+
+  const logoImage = logo && (
+    <Image
+      src={logo}
+      alt={company ?? ""}
+      sizes="230px"
+      className="h-8 w-auto transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 md:h-[50px]"
+    />
+  );
 
   return (
     <div
@@ -67,15 +76,39 @@ export function TestimonialCard({ testimonial, className = "", glassStyle, conte
           scrollable ? "-mr-3 overflow-y-auto overscroll-contain pr-3 [scrollbar-color:rgba(255,255,255,0.3)_transparent] [scrollbar-width:thin]" : ""
         }`}
       >
-        <figcaption className={logo ? "flex flex-col gap-5 md:flex-row md:items-center md:gap-[30px]" : ""}>
-          {logo && <Image src={logo} alt={company ?? ""} sizes="230px" className="h-10 w-auto self-start md:h-[60px] md:self-center" />}
-          <div className="flex flex-col gap-2.5">
-            <cite className="text-lg leading-[1.5] not-italic md:text-2xl md:leading-[1.5]">
-              <span className="text-brand">{"//"}</span>
-              {name}
-            </cite>
-            {designation && <p className="text-sm leading-[1.5] text-white/90 md:text-base md:leading-[1.5]">{designation}</p>}
+        <figcaption className={logo || photo ? "flex flex-col-reverse gap-5 md:flex-row md:items-center md:justify-between md:gap-[30px]" : ""}>
+          <div className="flex items-start gap-4 md:items-center md:gap-5">
+            {photo && (
+              <Image
+                src={photo}
+                alt={name}
+                sizes="80px"
+                className="size-[60px] shrink-0 border border-white/20 object-cover md:size-20"
+              />
+            )}
+            <div className="flex flex-col gap-2.5">
+              <cite className="text-lg leading-[1.5] not-italic md:text-2xl md:leading-[1.5]">
+                <span className="text-brand">{"//"}</span>
+                {name}
+              </cite>
+              {designation && <p className="text-sm leading-[1.5] text-white/90 md:text-base md:leading-[1.5]">{designation}</p>}
+            </div>
           </div>
+
+          {logoImage &&
+            (companyHref ? (
+              <a
+                href={companyHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${company ?? "Company"} website`}
+                className="group shrink-0 self-start md:self-center"
+              >
+                {logoImage}
+              </a>
+            ) : (
+              <span className="shrink-0 self-start md:self-center">{logoImage}</span>
+            ))}
         </figcaption>
 
         <blockquote className="flex flex-col gap-5 text-sm leading-6 md:text-base md:leading-[30px]">

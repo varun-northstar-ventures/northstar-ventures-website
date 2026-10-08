@@ -2,13 +2,12 @@ import Image from "next/image";
 
 import credential1 from "@/assets/credential-1.png";
 import credential2 from "@/assets/credential-2.png";
-import { PLACEHOLDER_URL } from "@/content/site";
 import { SectionTitle } from "./ui/SectionTitle";
 import { Dot } from "./ui/Text";
 
 const badges = [
-  { src: credential1, alt: "Autodesk Certified Instructor – Gold badge", className: "w-[100px] md:w-[150px]", href: PLACEHOLDER_URL },
-  { src: credential2, alt: "Autodesk Level Up Partner Onboarding badge", className: "w-[104px] md:w-[156px]", href: PLACEHOLDER_URL },
+  { src: credential1, alt: "Autodesk Certified Instructor – Gold badge", className: "w-[100px] md:w-[150px]", href: "https://www.credly.com/badges/c6b2c3bb-b33d-4a98-b5f2-dc9f2416dfb5/public_url" },
+  { src: credential2, alt: "Autodesk Level Up Partner Onboarding badge", className: "w-[104px] md:w-[156px]", href: "https://www.credly.com/badges/de1f3ee4-2650-4515-8953-a2e60ca74f84/public_url" },
 ];
 
 export function Credentials() {

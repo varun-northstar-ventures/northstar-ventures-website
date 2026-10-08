@@ -1,3 +1,4 @@
+import { links } from "@/content/site";
 import { ArrowUpRight } from "./ui/icons";
 import { MobileMenu } from "./MobileMenu";
 
@@ -11,7 +12,9 @@ export function Header() {
         </a>
 
         <a
-          href="#contact"
+          href={links.letsTalk}
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden h-[60px] items-center border border-white px-5 py-2.5 text-base leading-4 text-white transition-colors duration-300 hover:bg-white hover:text-brand md:flex"
         >
           <span className="flex items-end gap-2.5">

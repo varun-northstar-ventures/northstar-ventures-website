@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { navLinks } from "@/content/site";
 import { ArrowUpRight } from "./ui/icons";
 
-/** Fired by the nav's "Show all testimonials" item; the testimonials section opens its popup. */
+/** Fired by the nav's "Show All Testimonials" item; the testimonials section opens its popup. */
 export const OPEN_TESTIMONIALS_EVENT = "open-testimonials";
 
 /**
  * Glass pill nav pinned to the bottom of the viewport on larger screens (mobile
  * uses the menu). While the testimonials section is on screen it grows a fifth,
- * pink "Show all testimonials" item.
+ * pink "Show All Testimonials" item.
  */
 export function StickyNav() {
   const [testimonialsInView, setTestimonialsInView] = useState(false);
@@ -29,7 +29,10 @@ export function StickyNav() {
   return (
     <nav
       aria-label="Primary"
-      className="nav-rise fixed inset-x-0 bottom-[39px] z-40 mx-auto hidden w-fit items-center rounded-full border border-white bg-white/70 px-[30px] py-5 text-ink backdrop-blur-[8px] md:flex"
+      className={`nav-rise fixed inset-x-0 bottom-[39px] z-40 mx-auto hidden w-fit items-center rounded-full border border-white bg-white/70 py-5 pl-[30px] text-ink backdrop-blur-[8px] transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:flex ${
+        // With the pink pill showing, its right gap matches its top/bottom gap (nested-pill inset).
+        testimonialsInView ? "pr-[6px]" : "pr-[30px]"
+      }`}
     >
       <ul className="flex items-center gap-10">
         {navLinks.map((link) => (
@@ -43,8 +46,8 @@ export function StickyNav() {
 
       <div
         inert={!testimonialsInView}
-        className={`-my-[14px] -mr-[21px] overflow-hidden transition-[max-width,margin,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          testimonialsInView ? "ml-10 max-w-[260px] opacity-100" : "ml-0 max-w-0 opacity-0"
+        className={`-my-[14px] overflow-hidden transition-[max-width,margin,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          testimonialsInView ? "ml-[30px] max-w-[260px] opacity-100" : "ml-0 max-w-0 opacity-0"
         }`}
       >
         <button
@@ -53,7 +56,7 @@ export function StickyNav() {
           onClick={() => window.dispatchEvent(new Event(OPEN_TESTIMONIALS_EVENT))}
           className="flex h-[39px] cursor-pointer items-center gap-4 rounded-full bg-brand px-5 text-base leading-4 whitespace-nowrap text-white transition-colors duration-300 hover:bg-[#b000e0]"
         >
-          <span className="trim-cap block">Show all testimonials</span>
+          <span className="trim-cap block">Show All Testimonials</span>
           <ArrowUpRight />
         </button>
       </div>

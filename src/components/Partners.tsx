@@ -45,7 +45,7 @@ export function Partners() {
       </ul>
 
       <div className="flex justify-center" data-reveal>
-        <TestimonialsLauncher label="Show partners testimonials" title="Partner testimonials" testimonials={partnerTestimonials} />
+        <TestimonialsLauncher label="Show Partners Testimonials" title="Partner testimonials" testimonials={partnerTestimonials} />
       </div>
     </section>
   );

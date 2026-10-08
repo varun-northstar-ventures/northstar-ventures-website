@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import contactPortrait from "@/assets/contact-portrait.png";
-import { contactLinks } from "@/content/site";
+import { contactLinks, externalLinkProps } from "@/content/site";
 import { ArrowUpRight } from "./ui/icons";
 import { SectionTitle } from "./ui/SectionTitle";
 import { Dot } from "./ui/Text";
@@ -64,8 +64,8 @@ function ContactLinks() {
     <li key={link.label}>
       <a
         href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        title={"title" in link ? link.title : undefined}
+        {...externalLinkProps(link.href)}
         className="flex w-[89px] items-start justify-between gap-4 border-b border-brand pb-2.5 text-sm leading-[14px] text-brand transition-opacity duration-300 hover:opacity-70 lg:w-auto lg:text-base lg:leading-4"
       >
         <span className="trim-cap block">{link.label}</span>

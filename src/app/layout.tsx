@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 
 import { RevealObserver } from "@/components/RevealObserver";
+import { contactLinks, SITE_URL } from "@/content/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -11,16 +12,59 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const title = "Varun Nair | Autodesk Certified Instructor & Founder, NorthStar Ventures";
+const description =
+  "Varun Nair is an Autodesk Certified Instructor with 12+ years of AutoCAD, Revit and professional software training, and founder of NorthStar Ventures, supporting Autodesk Learning Partner onboarding and training programmes.";
+
+// og:image / twitter:image come from app/opengraph-image.jpg and app/twitter-image.jpg.
 export const metadata: Metadata = {
-  title: "Varun Nair | Autodesk Certified Instructor & Founder, NorthStar Ventures",
-  description:
-    "Varun Nair is an Autodesk Certified Instructor with 12+ years of AutoCAD, Revit and professional software training, and founder of NorthStar Ventures, supporting Autodesk Learning Partner onboarding and training programmes.",
+  metadataBase: new URL(SITE_URL),
+  title,
+  description,
+  applicationName: "NorthStar Ventures",
+  authors: [{ name: "Varun Nair", url: SITE_URL }],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Varun Nair | Autodesk Certified Instructor",
-    description:
-      "Practical, industry-focused Autodesk training and Autodesk Learning Partner support from Varun Nair, founder of NorthStar Ventures.",
     type: "website",
+    url: "/",
+    siteName: "NorthStar Ventures",
+    locale: "en_IN",
+    title,
+    description,
   },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: { index: true, follow: true },
+};
+
+/** Structured data so search engines understand who the site is about. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#varun-nair`,
+      name: "Varun Nair",
+      alternateName: "B Varun Nair",
+      jobTitle: "Autodesk Certified Instructor",
+      url: SITE_URL,
+      image: `${SITE_URL}/opengraph-image.jpg`,
+      email: "mailto:varun@northstar-ventures.in",
+      worksFor: { "@id": `${SITE_URL}/#organization` },
+      sameAs: contactLinks.filter((link) => link.href.startsWith("http")).map((link) => link.href),
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "NorthStar Ventures",
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo-dark.svg`,
+      founder: { "@id": `${SITE_URL}/#varun-nair` },
+    },
+  ],
 };
 
 export const viewport: Viewport = {
@@ -37,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
         <RevealObserver />
       </body>

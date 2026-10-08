@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { contactLinks, navLinks } from "@/content/site";
+import { contactLinks, externalLinkProps, links, navLinks } from "@/content/site";
 import { ArrowRight, ArrowUpRight, CloseIcon, MenuIcon } from "./ui/icons";
 
 /** Full-screen purple menu for small screens, built on <dialog> for focus trapping and Esc. */
@@ -65,8 +65,8 @@ export function MobileMenu() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    title={"title" in link ? link.title : undefined}
+                    {...externalLinkProps(link.href)}
                     className="flex w-[89px] items-start justify-between border-b border-white pb-2.5 text-sm leading-[14px]"
                   >
                     <span className="trim-cap block">{link.label}</span>
@@ -75,7 +75,7 @@ export function MobileMenu() {
                 </li>
               ))}
             </ul>
-            <a href="#contact" className="flex h-[60px] w-fit items-center border border-white px-5 py-2.5 text-base leading-4">
+            <a href={links.letsTalk} target="_blank" rel="noopener noreferrer" className="flex h-[60px] w-fit items-center border border-white px-5 py-2.5 text-base leading-4">
               <span className="flex items-end gap-2.5">
                 <span className="trim-cap block">
                   Let’s
