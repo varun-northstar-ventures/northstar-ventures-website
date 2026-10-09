@@ -15,7 +15,7 @@ export function Credentials() {
     <section
       id="credentials"
       aria-labelledby="credentials-title"
-      className="container-page flex flex-col gap-5 py-[100px] lg:flex-row lg:items-start lg:justify-between lg:py-[140px]"
+      className="container-page flex flex-col gap-5 pt-[100px] lg:flex-row lg:items-start lg:justify-between lg:pt-[140px]"
     >
       <div className="flex flex-col gap-5 md:gap-[30px] lg:w-[486px]">
         <SectionTitle eyebrow="Certifications" id="credentials-title">

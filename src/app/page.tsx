@@ -16,8 +16,8 @@ export default function Home() {
     <>
       <main>
         <Hero />
-        <Credentials />
         <About />
+        <Credentials />
         <Courses />
         <TrainerFamily />
         <Partners />
