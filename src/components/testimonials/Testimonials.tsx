@@ -17,9 +17,6 @@ const TestimonialsModal = dynamic(() => import("./TestimonialsModal"), { ssr: fa
 const STEP_VH = 60;
 /** How far below its resting place (px) the heading starts before drifting up. */
 const HEADING_TRAVEL = 80;
-/** Gap between the last card and "Show All" at the end of the sequence. */
-const BUTTON_GAP = 40;
-const BUTTON_HEIGHT = 50;
 
 type Metrics = {
   offsets: number[];
@@ -45,7 +42,6 @@ const initialMetrics: Metrics = {
 };
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 
 /*
  * Layout as a function of the card index `a` (0…last). Every function is
@@ -62,14 +58,6 @@ const listYAt = (a: number, { offsets, slotTop }: Metrics) => {
 const headingYAt = (a: number, { stageHeight, headingHeight, slotTop, last }: Metrics) => {
   const start = Math.max(slotTop, stageHeight / 2 - headingHeight / 2) + HEADING_TRAVEL;
   return lerp(start, slotTop, last === 0 ? 1 : a / last);
-};
-
-// "Show All" rests near the bottom, then rises to sit just under the last card.
-const buttonYAt = (a: number, { stageHeight, headingHeight, heights, slotTop, last }: Metrics) => {
-  const resting = stageHeight - 60 - BUTTON_HEIGHT;
-  const lastHeight = heights[heights.length - 1] ?? 0;
-  const final = Math.min(resting, Math.max(slotTop + lastHeight, slotTop + headingHeight) + BUTTON_GAP);
-  return lerp(resting, final, clamp01(a - (last - 1)));
 };
 
 // Cards away from the active slot (above or below) show their text at 50%.
@@ -133,7 +121,6 @@ function runNativeTimeline(section: HTMLElement, m: Metrics): (() => void) | nul
 
   animate(section.querySelector("[data-testimonials-heading]"), (a) => ({ transform: `translateY(${headingYAt(a, m)}px)` }));
   animate(section.querySelector("[data-testimonials-list]"), (a) => ({ transform: `translateY(${listYAt(a, m)}px)` }));
-  animate(section.querySelector("[data-testimonials-button]"), (a) => ({ transform: `translateY(${buttonYAt(a, m)}px)` }));
   section.querySelectorAll("[data-testimonials-list] > li").forEach((li, index) => {
     animate(li.querySelector("[data-card-content]"), (a) => ({ opacity: contentOpacityAt(index, a) }));
     animate(li.querySelector("[data-ghost]"), (a) => ({
@@ -184,8 +171,8 @@ export function Testimonials({ featured, all }: Props) {
         stageWidth: stage.clientWidth,
         stageHeight,
         headingHeight: heading.offsetHeight,
-        // Active card sits slightly above centre, as in the design.
-        slotTop: Math.max(80, stageHeight / 2 - firstHeight / 2 - 40),
+        // Active card is vertically centred in the viewport.
+        slotTop: Math.max(80, stageHeight / 2 - firstHeight / 2),
         cardLeft: (cards[0]?.getBoundingClientRect().left ?? 0) - stage.getBoundingClientRect().left,
         last,
       };
@@ -211,7 +198,6 @@ export function Testimonials({ featured, all }: Props) {
   const active = useTransform(scrollYProgress, [0, 1], [0, last]);
   const listY = useTransform(() => listYAt(active.get(), metrics.get()));
   const headingY = useTransform(() => headingYAt(active.get(), metrics.get()));
-  const buttonY = useTransform(() => buttonYAt(active.get(), metrics.get()));
 
   return (
     <section
@@ -235,22 +221,19 @@ export function Testimonials({ featured, all }: Props) {
           ref={listRef}
           data-testimonials-list
           style={native ? undefined : { y: listY }}
-          className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-[1035px] flex-col gap-[100px] px-5 will-change-transform md:gap-[140px]"
+          className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-[1035px] flex-col gap-[120px] px-5 will-change-transform md:gap-[160px]"
         >
           {featured.map((testimonial, i) => (
             <FadingCard key={testimonial.id} testimonial={testimonial} index={i} active={active} metrics={metrics} native={native} />
           ))}
         </motion.ul>
 
-        <motion.div
-          data-testimonials-button
-          style={native ? undefined : { y: buttonY }}
-          className="absolute inset-x-0 top-0 z-10 flex justify-center will-change-transform md:hidden"
-        >
+        {/* Mobile only (desktop uses the sticky nav): fixed at the bottom, level with the WhatsApp button. */}
+        <div className="absolute inset-x-0 bottom-[15px] z-10 flex justify-center md:hidden">
           <PillButton onClick={() => setModalOpen(true)} aria-haspopup="dialog">
             Show All
           </PillButton>
-        </motion.div>
+        </div>
       </div>
 
       {modalOpen && <TestimonialsModal testimonials={all} onClose={() => setModalOpen(false)} />}

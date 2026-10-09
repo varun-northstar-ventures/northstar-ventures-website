@@ -8,7 +8,7 @@ import { RevealWords } from "./ui/Text";
 
 export function Hero() {
   return (
-    <div id="top" className="relative overflow-x-clip">
+    <div id="top" className="relative flex h-dvh min-h-[600px] flex-col overflow-clip">
       {/* Purple half-ellipse glow (Figma "Ellipse 21", exported with its progressive blur). */}
       <div aria-hidden="true" className="hero-glow absolute left-1/2 -translate-x-1/2">
         <Image src={heroGlow} alt="" fill priority sizes="max(818px, 100vw)" className="object-fill" />
@@ -16,7 +16,7 @@ export function Hero() {
 
       <Header />
 
-      <section aria-labelledby="hero-title" className="relative flex flex-col items-center pt-[136px] md:pt-[156px]">
+      <section aria-labelledby="hero-title" className="relative flex min-h-0 flex-1 flex-col items-center pt-[136px] md:pt-[156px]">
         <div className="flex flex-col items-center gap-5 text-center text-white">
           <h1
             id="hero-title"
@@ -45,14 +45,14 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Portrait shrinks so the whole hero fits the viewport (design size is the maximum). */}
-        <div className="relative mt-[84px] h-[clamp(260px,calc(100svh-342px),458px)] md:mt-[76px] md:h-[clamp(320px,calc(100svh-325px),700px)]">
+        {/* Portrait fills the space left under the title, so the hero always fits the screen exactly. */}
+        <div className="relative mt-[84px] flex min-h-0 w-full flex-1 items-end justify-center md:mt-[76px]">
           <Image
             src={heroPortrait}
             alt="Varun Nair, Autodesk Certified Instructor, seated portrait"
             priority
-            sizes="(min-width: 768px) 549px, 360px"
-            className="h-full w-auto max-w-none"
+            sizes="(min-width: 768px) 720px, 400px"
+            className="h-full max-h-[900px] w-auto max-w-full object-contain object-bottom"
           />
         </div>
       </section>

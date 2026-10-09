@@ -18,7 +18,7 @@ export function Credentials() {
       className="container-page flex flex-col gap-5 py-[100px] lg:flex-row lg:items-start lg:justify-between lg:py-[140px]"
     >
       <div className="flex flex-col gap-5 md:gap-[30px] lg:w-[486px]">
-        <SectionTitle eyebrow="Credentials" id="credentials-title">
+        <SectionTitle eyebrow="Certifications" id="credentials-title">
           Officially Certified<Dot /> Ready To Enable<Dot />
         </SectionTitle>
         <p className="body-copy lg:w-[426px]" data-reveal>

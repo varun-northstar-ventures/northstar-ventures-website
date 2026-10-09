@@ -77,14 +77,12 @@ export function TestimonialCard({ testimonial, className = "", glassStyle, conte
         }`}
       >
         <figcaption className={logo || photo ? "flex flex-col-reverse gap-5 md:flex-row md:items-center md:justify-between md:gap-[30px]" : ""}>
+          {/* Same photo size on every card: 94px on larger screens, 60px on mobile. */}
           <div className="flex items-start gap-4 md:items-center md:gap-5">
             {photo && (
-              <Image
-                src={photo}
-                alt={name}
-                sizes="80px"
-                className="size-[60px] shrink-0 border border-white/20 object-cover md:size-20"
-              />
+              <span className="relative size-[60px] shrink-0 border border-white/20 md:size-[94px]">
+                <Image src={photo} alt={name} fill sizes="120px" className="object-cover" />
+              </span>
             )}
             <div className="flex flex-col gap-2.5">
               <cite className="text-lg leading-[1.5] not-italic md:text-2xl md:leading-[1.5]">

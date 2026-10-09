@@ -34,6 +34,23 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /*
+   * "Dark theme" that is identical to the light design. Browsers with their own
+   * forced dark mode (e.g. Samsung Internet's "Use website dark theme") see that
+   * the site provides a dark theme and use it instead of auto-darkening the page,
+   * so visitors still get the light design. Changes nothing anywhere else.
+   */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: only light;
+    }
+
+    body {
+      background: #ffffff;
+      color: var(--color-ink);
+    }
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 3px;
@@ -160,7 +177,8 @@
 .hero-glow {
   top: 0;
   width: max(818px, 100%);
-  height: clamp(466px, 56.95vw, 820px);
+  /* Never taller than the hero, so the soft edge doesn't spill into the next section. */
+  height: min(clamp(466px, 56.95vw, 820px), 100%);
   pointer-events: none;
 }
 
