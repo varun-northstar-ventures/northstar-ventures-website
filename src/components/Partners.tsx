@@ -10,7 +10,7 @@ export function Partners() {
     <section
       id="partners"
       aria-labelledby="partners-title"
-      className="container-page flex flex-col gap-5 pt-[100px] pb-20 md:gap-[60px] md:pt-0 md:pb-[140px]"
+      className="container-page flex flex-col gap-5 pt-[100px] pb-20 md:gap-[60px] md:pt-[140px] md:pb-[140px]"
     >
       <div className="flex flex-col gap-[30px] lg:flex-row lg:items-end lg:justify-between">
         <SectionTitle eyebrow="Partners" id="partners-title" className="max-w-[340px] md:max-w-[427px]">
@@ -25,7 +25,7 @@ export function Partners() {
         {partners.map((partner, i) => (
           <li
             key={i}
-            className={`border-r border-b border-line ${i === partners.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}
+            className={`border-r border-b border-line bg-white ${i === partners.length - 1 ? "col-span-2 lg:col-span-1" : ""}`}
           >
             <a
               href={partner.href}

@@ -1,4 +1,4 @@
-# Varun Nair / NorthStar Ventures — portfolio site
+# Varun Nair / Northstar Ventures — portfolio site
 
 Single-page site built from `North star ventures final.fig` with Next.js, TypeScript and Tailwind CSS v4.
 

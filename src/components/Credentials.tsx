@@ -29,7 +29,7 @@ export function Credentials() {
 
       <ul className="grid w-full grid-cols-2 border-t border-l border-line md:w-[599px]" data-reveal="right">
         {badges.map((badge) => (
-          <li key={badge.alt} className="border-r border-b border-line">
+          <li key={badge.alt} className="border-r border-b border-line bg-white">
             <a
               href={badge.href}
               target="_blank"

@@ -28,7 +28,7 @@ type Props = {
  * and a soft top highlight, over a blurred view of what's behind.
  */
 const glassFinish =
-  "border border-white/20 bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_45%,rgba(255,255,255,0.06)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_1px_0_0_rgba(255,255,255,0.08),0_10px_40px_rgba(0,0,0,0.35)]";
+  "border border-white/20 bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_45%,rgba(255,255,255,0.06)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_1px_0_0_rgba(255,255,255,0.08)]";
 
 const paragraphs = (quote: Testimonial["quote"]) => (Array.isArray(quote) ? quote : [quote]);
 

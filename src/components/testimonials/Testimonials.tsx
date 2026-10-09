@@ -145,6 +145,36 @@ export function Testimonials({ featured, all }: Props) {
   const last = featured.length - 1;
   const metrics = useMotionValue<Metrics>({ ...initialMetrics, last });
 
+  /*
+   * Mobile "Show All" acts like a sticky button inside this section: it appears once the
+   * section is pinned, stays level with the WhatsApp button, and at the section's end
+   * scrolls away with it instead of floating over the next section.
+   */
+  const showAllRef = useRef<HTMLDivElement>(null);
+  const [pinned, setPinned] = useState(false);
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const section = sectionRef.current?.getBoundingClientRect();
+      const el = showAllRef.current;
+      if (!section || !el) return;
+      setPinned(section.top <= 0 && section.bottom > 0);
+      el.style.transform = `translateY(${Math.min(0, section.bottom - window.innerHeight)}px)`;
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+
   // On larger screens "Show all testimonials" lives in the sticky nav.
   useEffect(() => {
     const open = () => setModalOpen(true);
@@ -205,9 +235,9 @@ export function Testimonials({ featured, all }: Props) {
       id="testimonials"
       aria-labelledby="testimonials-title"
       className="relative bg-ink text-white"
-      style={{ height: `calc(100svh + ${last * STEP_VH}svh)` }}
+      style={{ height: `calc(100lvh + ${last * STEP_VH}svh)` }}
     >
-      <div ref={stageRef} className="sticky top-0 h-svh overflow-hidden">
+      <div ref={stageRef} className="sticky top-0 h-lvh overflow-hidden">
         <motion.div
           ref={headingRef}
           data-testimonials-heading
@@ -228,8 +258,14 @@ export function Testimonials({ featured, all }: Props) {
           ))}
         </motion.ul>
 
-        {/* Mobile only (desktop uses the sticky nav): fixed at the bottom, level with the WhatsApp button. */}
-        <div className="absolute inset-x-0 bottom-[15px] z-10 flex justify-center md:hidden">
+        {/* Mobile only (desktop uses the sticky nav). */}
+        <div
+          ref={showAllRef}
+          inert={!pinned}
+          className={`fixed inset-x-0 bottom-[15px] z-30 flex justify-center transition-opacity duration-300 md:hidden ${
+            pinned ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        >
           <PillButton onClick={() => setModalOpen(true)} aria-haspopup="dialog">
             Show All
           </PillButton>

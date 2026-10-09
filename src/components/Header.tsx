@@ -6,9 +6,9 @@ export function Header() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="container-page flex h-20 items-center justify-between md:h-auto md:pt-5">
-        <a href="#top" aria-label="NorthStar Ventures – home" className="block">
+        <a href="#top" aria-label="Northstar Ventures – home" className="block">
           {/* eslint-disable-next-line @next/next/no-img-element -- tiny SVG logo, no optimisation needed */}
-          <img src="/logo-light.svg" alt="NorthStar Ventures" width={190} height={60} className="h-10 w-auto md:h-[60px]" />
+          <img src="/logo-light.svg" alt="Northstar Ventures" width={190} height={60} className="h-10 w-auto md:h-[60px]" />
         </a>
 
         <a

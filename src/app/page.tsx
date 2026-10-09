@@ -16,11 +16,11 @@ export default function Home() {
     <>
       <main>
         <Hero />
+        <Credentials />
         <About />
         <Courses />
-        <Partners />
         <TrainerFamily />
-        <Credentials />
+        <Partners />
         <WatchAndRead />
         <Testimonials featured={testimonials.slice(0, 4)} all={testimonials} />
       </main>

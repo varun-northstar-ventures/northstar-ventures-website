@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import contactPortrait from "@/assets/contact-portrait.png";
-import { contactLinks, externalLinkProps } from "@/content/site";
+import { contactLinks, credits, externalLinkProps } from "@/content/site";
 import { ArrowUpRight } from "./ui/icons";
 import { SectionTitle } from "./ui/SectionTitle";
 import { Dot } from "./ui/Text";
@@ -10,7 +10,20 @@ function FooterNote({ className = "" }: { className?: string }) {
   return (
     <div className={`text-xs leading-3 whitespace-nowrap ${className}`}>
       <p>© 2026 Northstar Ventures</p>
-      <p>Designed By Vivek</p>
+      <p className="flex flex-col gap-2.5 lg:flex-row lg:gap-6">
+        <span>
+          <span className="text-ink/50">Designed By</span>{" "}
+          <a href={credits.designer.href} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:text-brand hover:underline">
+            {credits.designer.name}
+          </a>
+        </span>
+        <span>
+          <span className="text-ink/50">Developed By</span>{" "}
+          <a href={credits.developer.href} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:text-brand hover:underline">
+            {credits.developer.name}
+          </a>
+        </span>
+      </p>
     </div>
   );
 }
@@ -21,7 +34,7 @@ export function Contact() {
       <div className="container-page flex flex-col gap-0 pt-[100px] lg:flex-row lg:items-end lg:justify-between lg:gap-[43px] lg:pt-0">
         <div className="flex flex-col gap-5 md:gap-[30px] lg:w-[534px] lg:self-center">
           {/* eslint-disable-next-line @next/next/no-img-element -- tiny SVG logo */}
-          <img src="/logo-dark.svg" alt="NorthStar Ventures" width={190} height={60} className="h-[50px] w-auto self-start md:h-[60px]" data-reveal />
+          <img src="/logo-dark.svg" alt="Northstar Ventures" width={190} height={60} className="h-[50px] w-auto self-start md:h-[60px]" data-reveal />
           <SectionTitle eyebrow="Get In Touch" id="contact-title">
             Let&apos;s Build <br className="hidden md:block" />
             Something <br className="hidden md:block" />

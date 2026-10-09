@@ -58,7 +58,7 @@ export function About() {
               certification.
             </p>
             <p>
-              I’m also the Founder of NorthStar Ventures, where I collaborate with training partners to expand their
+              I’m also the Founder of Northstar Ventures, where I collaborate with training partners to expand their
               Autodesk training capabilities. We support Autodesk Learning Partner onboarding, training centre setup,
               course development, and updated training programmes.
             </p>
@@ -94,7 +94,7 @@ export function About() {
               rel="noopener noreferrer"
               variant="light"
               icon={<PlayOutline className="text-brand" />}
-              className="w-[204px] justify-between md:w-auto md:justify-start"
+              className="w-[204px] justify-between md:hidden"
             >
               Watch Me
             </PillLink>

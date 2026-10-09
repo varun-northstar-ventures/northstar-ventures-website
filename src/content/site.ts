@@ -20,9 +20,9 @@ export const PLACEHOLDER_URL = "https://example.com";
 
 export const navLinks = [
   { label: "About", href: "#about" },
+  { label: "Certifications", href: "#credentials" },
   { label: "Courses", href: "#courses" },
   { label: "Partners", href: "#partners" },
-  { label: "Credentials", href: "#credentials" },
 ] as const;
 
 export const designations = [
@@ -43,6 +43,11 @@ export const links = {
   whatsapp: "https://wa.me/919539449909",
 };
 
+export const credits = {
+  designer: { name: "Vivek", href: "https://www.linkedin.com/in/vivek-viswan-077328170" },
+  developer: { name: "Shamsudheen", href: "https://www.linkedin.com/in/shamsudheen-choyimadathil" },
+};
+
 export const contactLinks = [
   { label: "Phone", href: "tel:+919539449909", title: "+91 95394 49909" },
   { label: "Email", href: "mailto:varun@northstar-ventures.in", title: "varun@northstar-ventures.in" },
@@ -57,7 +62,7 @@ export const externalLinkProps = (href: string) =>
 
 export const stats = [
   { value: 12, suffix: "+", label: "Years of Experience" },
-  { value: 1000, suffix: "+", label: "Professionals Trained" },
+  { value: 1200, suffix: "+", label: "Professionals Trained" },
   { value: 15, suffix: "+", label: "Countries" },
   { value: 4800, suffix: "+", label: "Hours of Online Trainings Delivered" },
 ] as const;

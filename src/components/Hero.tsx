@@ -8,7 +8,7 @@ import { RevealWords } from "./ui/Text";
 
 export function Hero() {
   return (
-    <div id="top" className="relative flex h-dvh min-h-[600px] flex-col overflow-clip">
+    <div id="top" className="relative flex h-svh min-h-[600px] flex-col overflow-clip">
       {/* Purple half-ellipse glow (Figma "Ellipse 21", exported with its progressive blur). */}
       <div aria-hidden="true" className="hero-glow absolute left-1/2 -translate-x-1/2">
         <Image src={heroGlow} alt="" fill priority sizes="max(818px, 100vw)" className="object-fill" />

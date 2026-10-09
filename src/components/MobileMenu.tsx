@@ -35,7 +35,7 @@ export function MobileMenu() {
         <div className="flex min-h-full flex-col">
           <div className="flex h-20 items-center justify-between px-5">
             {/* eslint-disable-next-line @next/next/no-img-element -- tiny SVG logo */}
-            <img src="/logo-light.svg" alt="NorthStar Ventures" width={126} height={40} className="h-10 w-auto" />
+            <img src="/logo-light.svg" alt="Northstar Ventures" width={126} height={40} className="h-10 w-auto" />
             <button
               type="button"
               onClick={close}

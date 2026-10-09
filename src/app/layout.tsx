@@ -12,22 +12,22 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const title = "Varun Nair | Autodesk Certified Instructor & Founder, NorthStar Ventures";
+const title = "Varun Nair | Autodesk Certified Instructor & Founder, Northstar Ventures";
 const description =
-  "Varun Nair is an Autodesk Certified Instructor with 12+ years of AutoCAD, Revit and professional software training, and founder of NorthStar Ventures, supporting Autodesk Learning Partner onboarding and training programmes.";
+  "Varun Nair is an Autodesk Certified Instructor with 12+ years of AutoCAD, Revit and professional software training, and founder of Northstar Ventures, supporting Autodesk Learning Partner onboarding and training programmes.";
 
 // og:image / twitter:image come from app/opengraph-image.jpg and app/twitter-image.jpg.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title,
   description,
-  applicationName: "NorthStar Ventures",
+  applicationName: "Northstar Ventures",
   authors: [{ name: "Varun Nair", url: SITE_URL }],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "NorthStar Ventures",
+    siteName: "Northstar Ventures",
     locale: "en_IN",
     title,
     description,
@@ -59,7 +59,7 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "NorthStar Ventures",
+      name: "Northstar Ventures",
       url: SITE_URL,
       logo: `${SITE_URL}/logo-dark.svg`,
       founder: { "@id": `${SITE_URL}/#varun-nair` },
