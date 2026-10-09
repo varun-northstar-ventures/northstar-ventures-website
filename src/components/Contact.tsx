@@ -59,7 +59,7 @@ export function Contact() {
             src={contactPortrait}
             alt="Varun Nair standing, photographed from above"
             sizes="(min-width: 1024px) 400px, 190px"
-            className="h-auto w-[190px] shrink-0 lg:mt-[125px] lg:w-[400px]"
+            className="mt-5 h-auto w-[190px] shrink-0 lg:mt-[125px] lg:w-[400px]"
           />
         </div>
       </div>
