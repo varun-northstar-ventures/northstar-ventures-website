@@ -38,7 +38,16 @@ export function Hero() {
                   className="rotating-word col-start-1 row-start-1 whitespace-nowrap"
                   style={{ "--i": i } as React.CSSProperties}
                 >
-                  {title}
+                  {/* Letters dissolve in one by one; long titles stagger faster so every title takes the same time. */}
+                  {[...title].map((char, j) => (
+                    <span
+                      key={j}
+                      className="dissolve-letter"
+                      style={{ "--d": `${j * Math.min(0.05, 0.6 / title.length)}s` } as React.CSSProperties}
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </span>
+                  ))}
                 </span>
               ))}
             </span>

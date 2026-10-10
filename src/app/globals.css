@@ -155,6 +155,13 @@
 
 .js [data-reveal="words"] .reveal-word {
   display: inline-block;
+  /*
+   * A filtered inline-block is drawn into a layer clipped to its own box; with tight
+   * heading line-heights, descenders (g, y, p) stick out and flicker while scrolling
+   * on mobile. Extra padding (cancelled by negative margin) keeps them inside the box.
+   */
+  padding-block: 0.2em;
+  margin-block: -0.2em;
   opacity: 0.25;
   filter: blur(6px);
   transition:
@@ -232,28 +239,38 @@
   animation: marquee-ltr 40s linear infinite;
 }
 
-/* Hero designation rotator: each word holds for 3s of a 12s cycle. */
-@keyframes rotate-word {
+/*
+ * Hero designation rotator ("dissolve"): each title gets a 4.5s slot of an 18s cycle.
+ * Its letters rise out of a blur one by one, hold, then dissolve upward in the same
+ * order, finishing before the next title starts.
+ */
+@keyframes dissolve-letter {
   0% {
     opacity: 0;
-    transform: translate3d(0, 60%, 0);
+    transform: translate3d(0, 8px, 0);
+    filter: blur(6px);
   }
-  4%,
-  21% {
+  6%,
+  15% {
     opacity: 1;
     transform: none;
+    filter: blur(0);
   }
-  25%,
+  20%,
   100% {
     opacity: 0;
-    transform: translate3d(0, -60%, 0);
+    transform: translate3d(0, -8px, 0);
+    filter: blur(6px);
   }
 }
 
-.rotating-word {
-  animation: rotate-word 12s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  animation-delay: calc(var(--i) * 3s);
-  opacity: 0;
+.dissolve-letter {
+  display: inline-block;
+  /* Box covers ascenders/descenders so the blur layer never clips them (see .reveal-word). */
+  padding-block: 0.2em;
+  margin-block: -0.2em;
+  animation: dissolve-letter 18s ease-in-out infinite both;
+  animation-delay: calc(var(--i) * 4.5s + var(--d, 0s));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -275,11 +292,11 @@
     animation: none;
   }
 
-  .rotating-word {
+  .dissolve-letter {
     animation: none;
   }
 
-  .rotating-word:first-child {
-    opacity: 1;
+  .rotating-word:not(:first-child) {
+    visibility: hidden;
   }
 }
