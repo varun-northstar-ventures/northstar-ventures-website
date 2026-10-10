@@ -43,7 +43,7 @@ export function Hero() {
                     <span
                       key={j}
                       className="dissolve-letter"
-                      style={{ "--d": `${j * Math.min(0.05, 0.6 / title.length)}s` } as React.CSSProperties}
+                      style={{ "--d": `${(j * 0.6) / title.length}s` } as React.CSSProperties}
                     >
                       {char === " " ? "\u00A0" : char}
                     </span>

@@ -4,8 +4,12 @@ import revit2027 from "@/assets/videos/revit-2027.png";
 import instructorInsights from "@/assets/videos/instructor-insights.png";
 import tipsAndTricks from "@/assets/videos/tips-and-tricks.png";
 import getStartedAutocad from "@/assets/videos/get-started-autocad.png";
+import haripriya from "@/assets/people/haripriya.webp";
 import jaiprakashPandey from "@/assets/people/jaiprakash-pandey.webp";
 import rickFeineis from "@/assets/people/rick-feineis.webp";
+// White-text versions of partner logos, for dark backgrounds (testimonials popup).
+import aecixLight from "@/assets/partners/aecix-light.webp";
+import sourcecadLight from "@/assets/partners/sourcecad-light.webp";
 import partner1 from "@/assets/partners/partner-1.png";
 import partner2 from "@/assets/partners/partner-2.png";
 import partner3 from "@/assets/partners/partner-3.png";
@@ -284,9 +288,10 @@ export const partnerTestimonials: Testimonial[] = [
   {
     id: 102,
     name: "Haripriya",
+    photo: haripriya,
     designation: "Chief Executive Officer",
     company: "AECIX Learning",
-    logo: partner5,
+    logo: aecixLight,
     companyHref: partners[4].href,
     quote:
       "Varun is highly committed to every responsibility he undertakes and consistently demonstrates dedication in delivering quality work. He is also a positive-minded and approachable individual, making him easy to collaborate with and a valued member of any team. His willingness to support others and maintain a constructive attitude contributes to a productive and pleasant work environment.",
@@ -297,7 +302,7 @@ export const partnerTestimonials: Testimonial[] = [
     photo: jaiprakashPandey,
     designation: "Author and Creator",
     company: "SourceCAD Learning",
-    logo: partner2,
+    logo: sourcecadLight,
     companyHref: partners[1].href,
     quote: [
       "Varun has delivered several training programs for SourceCAD, and each one has been a pleasure to watch. He has that rare mix of deep technical knowledge and genuine patience. He never rushes a learner, and he can explain the same concept three different ways until it clicks.",

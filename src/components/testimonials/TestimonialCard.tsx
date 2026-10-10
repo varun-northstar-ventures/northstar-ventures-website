@@ -45,7 +45,7 @@ export function TestimonialCard({ testimonial, className = "", glassStyle, conte
       src={logo}
       alt={company ?? ""}
       sizes="230px"
-      className="h-8 w-auto transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 md:h-[50px]"
+      className="h-auto max-h-8 w-auto max-w-[140px] object-contain transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 md:max-h-[50px] md:max-w-[170px]"
     />
   );
 
@@ -73,7 +73,7 @@ export function TestimonialCard({ testimonial, className = "", glassStyle, conte
         data-card-content
         style={contentStyle}
         className={`relative flex min-h-0 flex-col gap-[30px] ${
-          scrollable ? "-mr-3 overflow-y-auto overscroll-contain pr-3 [scrollbar-color:rgba(255,255,255,0.3)_transparent] [scrollbar-width:thin]" : ""
+          scrollable ? "-mr-3 overflow-x-hidden overflow-y-auto overscroll-contain pr-3 [scrollbar-color:rgba(255,255,255,0.3)_transparent] [scrollbar-width:thin]" : ""
         }`}
       >
         <figcaption className={logo || photo ? "flex flex-col-reverse gap-5 md:flex-row md:items-center md:justify-between md:gap-[30px]" : ""}>

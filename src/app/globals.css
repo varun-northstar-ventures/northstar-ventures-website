@@ -240,9 +240,10 @@
 }
 
 /*
- * Hero designation rotator ("dissolve"): each title gets a 4.5s slot of an 18s cycle.
- * Its letters rise out of a blur one by one, hold, then dissolve upward in the same
- * order, finishing before the next title starts.
+ * Hero designation rotator ("dissolve"): original fade lengths (1.08s in, 1.62s hold,
+ * 0.9s out) with smooth ease-in-out. Each title owns exactly a quarter of a 14.4s
+ * cycle (3.6s), so every letter starts fading in the instant the matching letter of
+ * the previous title has fully faded out: no idle gap, no overlap.
  */
 @keyframes dissolve-letter {
   0% {
@@ -250,13 +251,13 @@
     transform: translate3d(0, 8px, 0);
     filter: blur(6px);
   }
-  6%,
-  15% {
+  7.5%,
+  18.75% {
     opacity: 1;
     transform: none;
     filter: blur(0);
   }
-  20%,
+  25%,
   100% {
     opacity: 0;
     transform: translate3d(0, -8px, 0);
@@ -269,8 +270,8 @@
   /* Box covers ascenders/descenders so the blur layer never clips them (see .reveal-word). */
   padding-block: 0.2em;
   margin-block: -0.2em;
-  animation: dissolve-letter 18s ease-in-out infinite both;
-  animation-delay: calc(var(--i) * 4.5s + var(--d, 0s));
+  animation: dissolve-letter 14.4s ease-in-out infinite both;
+  animation-delay: calc(var(--i) * 3.6s + var(--d, 0s));
 }
 
 @media (prefers-reduced-motion: reduce) {
