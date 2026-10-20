@@ -4,6 +4,7 @@ import revit2027 from "@/assets/videos/revit-2027.png";
 import instructorInsights from "@/assets/videos/instructor-insights.png";
 import tipsAndTricks from "@/assets/videos/tips-and-tricks.png";
 import getStartedAutocad from "@/assets/videos/get-started-autocad.png";
+import ananthuViinod from "@/assets/people/ananthu-viinod.webp";
 import haripriya from "@/assets/people/haripriya.webp";
 import jaiprakashPandey from "@/assets/people/jaiprakash-pandey.webp";
 import rickFeineis from "@/assets/people/rick-feineis.webp";
@@ -275,7 +276,7 @@ export const partnerTestimonials: Testimonial[] = [
     id: 101,
     name: "Rick Feineis",
     photo: rickFeineis,
-    designation: "Founder, Autodesk Certified  Instructor (ACI) Platinum, CompTIA Certified Technical Trainer (CTT+),  Autodesk Certified Examiner (ACE)",
+    designation: "Founder, Autodesk Certified Instructor (ACI) Platinum, CompTIA Certified Technical Trainer (CTT+), Autodesk Certified Examiner (ACE)",
     company: "CAD Training Online",
     logo: partner3,
     companyHref: partners[2].href,
@@ -287,14 +288,14 @@ export const partnerTestimonials: Testimonial[] = [
   },
   {
     id: 102,
-    name: "Haripriya",
+    name: "Haripriya V",
     photo: haripriya,
     designation: "Chief Executive Officer",
     company: "AECIX Learning",
     logo: aecixLight,
     companyHref: partners[4].href,
     quote:
-      "Varun is highly committed to every responsibility he undertakes and consistently demonstrates dedication in delivering quality work. He is also a positive-minded and approachable individual, making him easy to collaborate with and a valued member of any team. His willingness to support others and maintain a constructive attitude contributes to a productive and pleasant work environment.",
+      "Varun Nair has been a great support to us as we build AECIX Learning. He handled our communication with Autodesk clearly and professionally, which helped us make real progress. He also guided us toward best practices in software training, and his recommendations shaped how we approach our courses. What I valued most was how quickly he grasped our go-to-market plans and offered practical input that helped me think them through, and he always delivered what he committed to on time. With so much of the business resting on me, having someone as dependable as Varun made a real difference. I’d recommend him without hesitation.",
   },
   {
     id: 103,
@@ -310,5 +311,16 @@ export const partnerTestimonials: Testimonial[] = [
       "Beyond the classroom, Varun is dependable. He prepares thoroughly, shows up on time, follows through on every commitment, and handles learner questions long after the session ends with the same care he shows during it. The feedback we consistently receive on his trainings is excellent, and he has played a real part in the experience our learners have with SourceCAD.",
       "I would recommend Varun without hesitation to any organization looking for a skilled, reliable, and engaging trainer.",
     ],
+  },
+  {
+    id: 104,
+    name: "Ananthu Viinod",
+    photo: ananthuViinod,
+    designation: "Co Founder",
+    company: "AECIX Learning",
+    logo: aecixLight,
+    companyHref: partners[4].href,
+    quote:
+      "Varun Nair worked closely with me to review the AECIX LMS, and his input was genuinely useful. He looked at the platform from the learner’s side as well as a trainer’s side, pointed out what needed fixing, and suggested improvements that were practical to build. Coming from a software background, I appreciated how clear and structured his feedback was. It helped us strengthen the LMS before taking it to learners. I’d confidently recommend Varun to any team that wants a sharp, honest second pair of eyes on their product.",
   },
 ];
